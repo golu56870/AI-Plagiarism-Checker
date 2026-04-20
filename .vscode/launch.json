@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run IntegrityAI Server",
+      "program": "${workspaceFolder}\\server.js",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "preLaunchTask": "Install Dependencies"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug IntegrityAI Server",
+      "program": "${workspaceFolder}\\server.js",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    }
+  ]
+}

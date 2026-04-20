@@ -1,0 +1,22 @@
+{
+  "name": "integrity-ai-checker",
+  "version": "1.0.0",
+  "description": "Turnitin-style AI plagiarism checker and writing feedback web app prototype.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "migrate:mongo": "node scripts/migrate-json-to-mongo.js"
+  },
+  "dependencies": {
+    "mongodb": "^6.16.0"
+  },
+  "keywords": [
+    "plagiarism",
+    "writing-feedback",
+    "academic-integrity",
+    "ai-detection"
+  ],
+  "author": "",
+  "license": "MIT"
+}

@@ -1,0 +1,123 @@
+{
+  "users": [],
+  "submissions": [
+    {
+      "id": "sub_e46dfb3b-bdb6-4910-a39c-c1391d287604",
+      "userId": "test-user",
+      "filePath": "C:\\Users\\kumar\\OneDrive\\Desktop\\Golu\\data\\uploads\\1776621343494_sample-upload.txt",
+      "filename": "sample-upload.txt",
+      "timestamp": "2026-04-19T17:55:43.499Z",
+      "reportId": "rep_736eefd1-ada2-41e9-9df3-a9c49a1ca3ef",
+      "status": "complete"
+    }
+  ],
+  "reports": [
+    {
+      "id": "rep_736eefd1-ada2-41e9-9df3-a9c49a1ca3ef",
+      "filename": "sample-upload.txt",
+      "userId": "test-user",
+      "createdAt": "2026-04-19T17:55:43.499Z",
+      "wordCount": 28,
+      "extractedText": "Academic integrity requires that students cite sources accurately and avoid copying language without quotation marks. Strong research writing introduces a claim and integrates evidence. References Miller, A. (2022). Responsible writing.",
+      "similarity": {
+        "overall": 31,
+        "sourceMatches": [
+          {
+            "title": "Institutional repository: Academic honesty guide",
+            "url": "internal://academic-honesty-guide",
+            "text": "Academic integrity requires that students cite sources accurately, avoid copying language without quotation marks, and submit original analysis. Paraphrased ideas must still include attribution.",
+            "score": 42,
+            "lexical": 16,
+            "semantic": 58
+          },
+          {
+            "title": "Open web: Research writing primer",
+            "url": "https://example.edu/research-writing-primer",
+            "text": "Strong research writing introduces a claim, integrates evidence, explains the reasoning, and uses a consistent citation style. A clear paragraph usually connects evidence to the central argument.",
+            "score": 27,
+            "lexical": 2,
+            "semantic": 37
+          },
+          {
+            "title": "Student archive: AI ethics essay sample",
+            "url": "internal://student-archive-ai-ethics",
+            "text": "Artificial intelligence systems influence education by automating feedback, identifying patterns in student work, and raising questions about authorship, transparency, and accountability.",
+            "score": 11,
+            "lexical": 0,
+            "semantic": 15
+          },
+          {
+            "title": "Library source: Citation basics",
+            "url": "internal://library-citation-basics",
+            "text": "APA citations include author, year, title, and source information. MLA emphasizes author and page references, while Chicago may use footnotes or author date formatting.",
+            "score": 11,
+            "lexical": 0,
+            "semantic": 16
+          }
+        ],
+        "segments": [
+          {
+            "id": "seg_1",
+            "matchedText": "Academic integrity requires that students cite sources accurately and avoid copying language without quotation marks.",
+            "sourceTitle": "Institutional repository: Academic honesty guide",
+            "sourceUrl": "internal://academic-honesty-guide",
+            "score": 68,
+            "type": "high"
+          },
+          {
+            "id": "seg_2",
+            "matchedText": "Strong research writing introduces a claim and integrates evidence.",
+            "sourceTitle": "Open web: Research writing primer",
+            "sourceUrl": "https://example.edu/research-writing-primer",
+            "score": 53,
+            "type": "medium"
+          }
+        ]
+      },
+      "writing": {
+        "readability": 92,
+        "avgSentenceLength": 6,
+        "passiveConstructions": 0,
+        "longSentenceCount": 0,
+        "suggestions": [
+          {
+            "category": "Flow",
+            "message": "Add transition language to show how evidence supports the argument.",
+            "severity": "low"
+          },
+          {
+            "category": "Development",
+            "message": "The draft is short for a full submission. Add evidence, explanation, and source integration.",
+            "severity": "medium"
+          }
+        ]
+      },
+      "citations": {
+        "styleGuess": "Unknown",
+        "inTextCitationCount": 0,
+        "bibliographyFound": true,
+        "quotedPassages": 0,
+        "issues": [
+          "No recognizable in-text citations were found."
+        ],
+        "suggestions": [
+          {
+            "message": "No recognizable in-text citations were found."
+          }
+        ]
+      },
+      "aiContent": {
+        "probability": 4,
+        "label": "Likely human-written",
+        "signals": [
+          "Vocabulary uniqueness: 93%",
+          "Sentence uniformity: 5%",
+          "Formulaic transition density: 0%"
+        ],
+        "disclaimer": "This is a heuristic demo signal, not a disciplinary determination."
+      },
+      "integrityScore": 79,
+      "status": "complete"
+    }
+  ]
+}

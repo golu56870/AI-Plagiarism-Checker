@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IntegrityAI Studio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#upload" aria-label="IntegrityAI Studio">
+        <span class="brand-mark"></span>
+        <span>IntegrityAI Studio</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#upload">Upload</a>
+        <a href="#realtime">Live Check</a>
+        <a href="#report">Report</a>
+        <a href="#dashboard">Teacher</a>
+      </nav>
+      <div class="auth-actions">
+        <span id="authStatus">Not logged in</span>
+        <button class="secondary-button compact" id="loginToggle" type="button">Login</button>
+        <button class="secondary-button compact hidden" id="logoutButton" type="button">Logout</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="auth-panel hidden" id="authPanel" aria-label="Login panel">
+        <form id="authForm">
+          <div>
+            <p class="eyebrow">Account access</p>
+            <h2 id="authTitle">Login to upload documents</h2>
+            <div class="auth-tabs" role="tablist" aria-label="Account action">
+              <button class="auth-tab active" id="loginTab" type="button">Login</button>
+              <button class="auth-tab" id="registerTab" type="button">Register</button>
+            </div>
+          </div>
+          <label>
+            Email
+            <input id="authEmail" type="email" value="student@example.edu" required />
+          </label>
+          <label id="authNameLabel">
+            Name
+            <input id="authName" type="text" value="Demo Student" required />
+          </label>
+          <label>
+            Password
+            <input id="authPassword" type="password" value="student123" minlength="6" required />
+          </label>
+          <label>
+            Role
+            <select id="authRole">
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+              <option value="admin">Admin</option>
+            </select>
+          </label>
+          <button class="primary-button" id="authSubmit" type="submit">Login</button>
+          <span id="authMessage">Login with your registered email and password.</span>
+        </form>
+      </section>
+
+      <section class="hero" id="upload">
+        <div class="hero-copy">
+          <p class="eyebrow">Academic integrity workspace</p>
+          <h1>Check originality, improve writing, and review citations in one submission flow.</h1>
+          <p class="lead">
+            Upload a document, run similarity analysis, inspect AI-writing signals, and generate a report ready for students or instructors.
+          </p>
+          <div class="hero-actions">
+            <label class="primary-button locked-action" id="chooseDocumentButton" for="documentInput">Choose document</label>
+            <button class="secondary-button locked-action" id="sampleButton" type="button">Use sample text</button>
+          </div>
+        </div>
+        <form class="upload-panel" id="uploadForm">
+          <div class="login-required" id="loginRequired">
+            <strong>Login required</strong>
+            <span>Please login first to upload documents and generate reports.</span>
+            <button class="primary-button" id="openLoginFromUpload" type="button">Login now</button>
+          </div>
+          <div class="drop-zone" id="dropZone">
+            <input id="documentInput" name="document" type="file" accept=".txt,.pdf,.docx" />
+            <div>
+              <strong id="fileName">Drop PDF, DOCX, or TXT here</strong>
+              <span>OCR-style extraction, similarity, feedback, citations, and AI-content detection run together.</span>
+            </div>
+          </div>
+          <label>
+            Student email
+            <input id="emailInput" type="email" value="student@example.edu" readonly />
+          </label>
+          <label>
+            Student name
+            <input id="nameInput" type="text" value="Demo Student" readonly />
+          </label>
+          <button class="primary-button full" type="submit">Generate integrity report</button>
+          <div class="progress" aria-live="polite">
+            <span id="progressLabel">Waiting for a document</span>
+            <div class="progress-track"><span id="progressBar"></span></div>
+          </div>
+        </form>
+      </section>
+
+      <section class="status-band" aria-label="System capabilities">
+        <div><strong>n-gram + semantic</strong><span>Similarity engine</span></div>
+        <div><strong>LLM-style rubric</strong><span>Writing feedback</span></div>
+        <div><strong>APA / MLA signals</strong><span>Citation review</span></div>
+        <div><strong>Heuristic score</strong><span>AI-content detection</span></div>
+      </section>
+
+      <section class="storage-strip" aria-label="Storage status">
+        <strong>Database</strong>
+        <span id="storageStatus">Checking MongoDB connection...</span>
+      </section>
+
+      <section class="realtime-section" id="realtime">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Real-time checker</p>
+            <h2>Live writing analysis</h2>
+          </div>
+          <button class="secondary-button" id="loadLiveSample" type="button">Load sample</button>
+        </div>
+        <div class="live-grid">
+          <label class="live-editor">
+            Draft text
+            <textarea id="liveText" rows="14" placeholder="Paste or type your assignment here. Analysis starts after a short pause."></textarea>
+            <span id="liveStatus">Waiting for text</span>
+          </label>
+          <div class="live-results">
+            <article>
+              <span>Similarity</span>
+              <strong id="liveSimilarity">--</strong>
+            </article>
+            <article>
+              <span>Writing</span>
+              <strong id="liveWriting">--</strong>
+            </article>
+            <article>
+              <span>AI content</span>
+              <strong id="liveAi">--</strong>
+            </article>
+            <article>
+              <span>Citations</span>
+              <strong id="liveCitations">--</strong>
+            </article>
+          </div>
+        </div>
+        <div class="live-feedback">
+          <article>
+            <h3>Live heatmap</h3>
+            <div class="document-text small" id="liveHeatmap">Type at least 20 characters to start.</div>
+          </article>
+          <article>
+            <h3>Live suggestions</h3>
+            <ul id="liveSuggestions" class="clean-list"></ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="report-shell" id="report">
+        <div class="section-heading">
+          <p class="eyebrow">Student report</p>
+          <h2>Integrity report</h2>
+          <button class="secondary-button" id="printButton" type="button">Download PDF</button>
+        </div>
+
+        <div class="summary-grid">
+          <article class="metric">
+            <span>Similarity</span>
+            <strong id="similarityScore">--</strong>
+            <small>Matched source overlap</small>
+          </article>
+          <article class="metric">
+            <span>Writing</span>
+            <strong id="writingScore">--</strong>
+            <small>Readability estimate</small>
+          </article>
+          <article class="metric">
+            <span>AI content</span>
+            <strong id="aiScore">--</strong>
+            <small id="aiLabel">Awaiting analysis</small>
+          </article>
+          <article class="metric">
+            <span>Integrity</span>
+            <strong id="integrityScore">--</strong>
+            <small>Combined risk score</small>
+          </article>
+        </div>
+
+        <div class="analysis-layout">
+          <article class="document-viewer">
+            <div class="panel-heading">
+              <h3>Similarity heatmap</h3>
+              <span id="wordCount">0 words</span>
+            </div>
+            <div class="heatmap-legend">
+              <span><i class="low"></i> Low</span>
+              <span><i class="medium"></i> Medium</span>
+              <span><i class="high"></i> High</span>
+            </div>
+            <div class="document-text" id="documentText">
+              Upload a document to see highlighted similarity segments here.
+            </div>
+          </article>
+
+          <aside class="feedback-stack">
+            <article>
+              <h3>Writing feedback</h3>
+              <ul id="feedbackList" class="clean-list"></ul>
+            </article>
+            <article>
+              <h3>Citation review</h3>
+              <div id="citationSummary" class="mini-summary">No report generated yet.</div>
+              <ul id="citationList" class="clean-list"></ul>
+            </article>
+            <article>
+              <h3>Matched sources</h3>
+              <ul id="sourceList" class="source-list"></ul>
+            </article>
+          </aside>
+        </div>
+      </section>
+
+      <section class="teacher-section" id="dashboard">
+        <div class="section-heading">
+          <p class="eyebrow">Teacher dashboard</p>
+          <h2>Submission monitoring</h2>
+          <button class="secondary-button" id="refreshButton" type="button">Refresh</button>
+        </div>
+        <div class="filters">
+          <label>
+            Risk filter
+            <select id="riskFilter">
+              <option value="all">All submissions</option>
+              <option value="high">High similarity</option>
+              <option value="ai">AI-content risk</option>
+              <option value="citation">Citation issues</option>
+            </select>
+          </label>
+          <label>
+            Search
+            <input id="searchInput" type="search" placeholder="File, student, report id" />
+          </label>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Document</th>
+                <th>Submitted</th>
+                <th>Similarity</th>
+                <th>AI</th>
+                <th>Citations</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="submissionRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <span>Prototype engines are local and deterministic.</span>
+      <span>Connect production SBERT, vector DB, OCR, and LLM providers behind the same routes.</span>
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
