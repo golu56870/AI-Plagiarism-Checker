@@ -22,7 +22,7 @@ const ENV_FILE = path.join(ROOT, ".env");
 loadEnvFile();
 
 const PORT = Number(process.env.PORT || 3000);
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017";
+const MONGODB_URI = "m${{MongoDB.MONGO_URL}}";
 const REQUESTED_MONGODB_DB = process.env.MONGODB_DB || "ai_plagiarism_checker";
 const MONGODB_DB = /pharma/i.test(REQUESTED_MONGODB_DB) ? "ai_plagiarism_checker" : REQUESTED_MONGODB_DB;
 const USE_MONGODB = String(process.env.USE_MONGODB || "true").toLowerCase() !== "false";
